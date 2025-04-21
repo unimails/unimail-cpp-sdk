@@ -34,7 +34,7 @@ set_target_properties(
 target_include_directories(unimail PUBLIC
                 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
                 $<INSTALL_INTERFACE:include>)
-target_link_libraries(unimail PRIVATE nlohmann_json::nlohmann_json restclient-cpp)
+target_link_libraries(unimail PUBLIC nlohmann_json::nlohmann_json restclient-cpp)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
       DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
