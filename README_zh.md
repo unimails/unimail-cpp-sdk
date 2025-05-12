@@ -1,23 +1,23 @@
 # unimail-cpp-sdk
 
-This is a C++ SDK for Unimail. Quickly integrate into your project
+unimail 的 c++ 语言 sdk, 快速集成到你的项目
 
-[中文文档](README_zh.md)
+[english docs](README.md)
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
 - [unimail-cpp-sdk](#unimail-cpp-sdk)
-  - [simple usage](#simple-usage)
+  - [简单使用](#简单使用)
   - [api docs](#api-docs)
-  - [support language](#support-language)
+  - [支持的语言](#支持的语言)
 
 <!-- /code_chunk_output -->
 
-## simple usage
+## 简单使用
 
-- install
+- 安装
 
 vcpkg
 
@@ -25,16 +25,16 @@ vcpkg
 vcpkg install unimail-cpp-sdk
 ```
 
-link in you cmake
+集成到 cmake 文件
 
 ```CMakeLists.txt
 find_package(unimail-cpp-sdk CONFIG REQUIRED)
 target_link_libraries(main PRIVATE icurve::unimail)
 ```
 
-- init a unimail client
+- 初始化客户端
 
-you need a authorization key.
+你需要申请一个 key
 
 main.cpp
 
@@ -51,23 +51,23 @@ int main() {
 }
 ```
 
-- send email
+- 发邮件
 
-example
-receiver: aaa@gmail.com  
-email subject: email subject  
-email content: this is a email content
+例如
+收件人: aaa@gmail.com  
+邮件标题: email subject  
+邮件正文: this is a email content
 
 ```cpp
 client->send_email("email", "test", "test from unimailCppSdk");
 ```
 
-- batch send email
+- 批量发送邮件
 
-example
-receivers: aaa@gmail.com,bbb@gmail.com  
-email subject: email subject  
-email content: this is a email content
+例如
+收件人: aaa@gmail.com,bbb@gmail.com  
+邮件标题: email subject  
+邮件正文: this is a email content
 
 ```cpp
 client->batch_send_email(std::vector<std::string>{"email"}, "test", "test from unimailCppSdk");
@@ -75,7 +75,7 @@ client->batch_send_email(std::vector<std::string>{"email"}, "test", "test from u
 
 ## api docs
 
-1. icurve::UniMail(string key)
+. icurve::UniMail(string key)
 
 init a client by key
 
@@ -99,9 +99,9 @@ send email to receiver. if you have many receiver, you can concat the receiver b
 
 like send_email, but receivers is a vector
 
-## support language
+## 支持的语言
 
-chinese is the default language for the sdk.
+sdk 默认返回的 msg 为中文
 
 - [x] english (en)
 - [x] simple chinese (zh)
@@ -110,4 +110,4 @@ chinese is the default language for the sdk.
 - [x] thai (th)
 - [x] gujarati (gu)
 
-if you want to support other language, please open a issue.
+如果你需要添加了更多语言，欢迎提 issue
