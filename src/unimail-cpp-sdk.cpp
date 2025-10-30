@@ -47,20 +47,10 @@ bool UniMail::set_language(std::string lang) {
 }
 bool UniMail::check_connection() {
     RestClient::init();
-    // 创建一个连接对象
-    // RestClient::Connection *conn = new RestClient::Connection(this->host);
-
-    // // 设置自定义请求头
-    // RestClient::HeaderFields headers;
-    // headers["Content-Type"] = "application/json"; // 设置 Content-Type
-    // headers["Authorization"] = this->key;         // 添加 Authorization 头
-    // headers["accept-language"] = this->lang;      // 添加自定义头
-    // conn->SetHeaders(headers);
-
     // 发送 POST 请求
     RestClient::Response r =
         std::static_pointer_cast<RestClient::Connection>(rest)->post(
-            "/api/email/checkConnection", "{}");
+            "/checkConnection", "{}");
     if (r.code != 200)
         return false;
     RestClient::disable();
@@ -69,14 +59,6 @@ bool UniMail::check_connection() {
 
 UniMailResponse UniMail::send_email(std::string receiver, std::string subject,
                                     std::string content) {
-    // RestClient::Connection *conn = new RestClient::Connection(this->host);
-
-    // // 设置自定义请求头
-    // RestClient::HeaderFields headers;
-    // headers["Content-Type"] = "application/json"; // 设置 Content-Type
-    // headers["Authorization"] = this->key;         // 添加 Authorization 头
-    // headers["accept-language"] = this->lang;      // 添加自定义头
-    // conn->SetHeaders(headers);
     nlohmann::json data;
     data["receiver"] = receiver;
     data["title"] = subject;
@@ -85,21 +67,13 @@ UniMailResponse UniMail::send_email(std::string receiver, std::string subject,
     // 发送 POST 请求
     RestClient::Response r =
         std::static_pointer_cast<RestClient::Connection>(rest)->post(
-            "/api/email/sendEmail", data.dump());
+            "/sendEmail", data.dump());
     return UniMailResponse(r.code, r.body);
 }
 
 UniMailResponse UniMail::batch_send_email(std::vector<std::string> receivers,
                                           std::string subject,
                                           std::string content) {
-    // RestClient::Connection *conn = new RestClient::Connection(this->host);
-
-    // // 设置自定义请求头
-    // RestClient::HeaderFields headers;
-    // headers["Content-Type"] = "application/json"; // 设置 Content-Type
-    // headers["Authorization"] = this->key;         // 添加 Authorization 头
-    // headers["accept-language"] = this->lang;      // 添加自定义头
-    // conn->SetHeaders(headers);
     nlohmann::json data;
     data["receivers"] = receivers;
     data["title"] = subject;
@@ -107,7 +81,7 @@ UniMailResponse UniMail::batch_send_email(std::vector<std::string> receivers,
     // 发送 POST 请求
     RestClient::Response r =
         std::static_pointer_cast<RestClient::Connection>(rest)->post(
-            "/api/email/batchSendEmail", data.dump());
+            "/batchSendEmail", data.dump());
     return UniMailResponse(r.code, r.body);
 }
 

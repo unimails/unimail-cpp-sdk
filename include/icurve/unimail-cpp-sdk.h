@@ -17,8 +17,8 @@ public:
 
 class UniMail {
 public:
-    UniMail(std::string key, std::string host = std::string(
-                                 "https://unimail-back.allcloud.top"));
+    UniMail(std::string key,
+            std::string host = std::string("https://uniapi.allcloud.top"));
     ~UniMail();
 
     void set_host(std::string host);

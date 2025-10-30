@@ -111,3 +111,7 @@ sdk 默认返回的 msg 为中文
 - [x] gujarati (gu)
 
 如果你需要添加了更多语言，欢迎提 issue
+
+- 提示
+
+如果想要使用 unimail sdk, 请通过邮件联系作者 i-curve@qq.com

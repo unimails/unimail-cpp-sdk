@@ -111,3 +111,7 @@ chinese is the default language for the sdk.
 - [x] gujarati (gu)
 
 if you want to support other language, please open a issue.
+
+- tips
+
+If you want to use this SDK, please contact the author via i-curve@qq.com.
