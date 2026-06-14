@@ -1,6 +1,6 @@
 # unimail-cpp-sdk
 
-> The current branch SDK version is v1. This branch will no longer receive functional updates. For new users, please refer to the main branch "master".
+> The current SDK version is v2. If you need to use the previous v1 version, please switch to the v1 branch.
 
 This is a C++ SDK for Unimail. Quickly integrate into your project
 
@@ -22,8 +22,6 @@ This is a C++ SDK for Unimail. Quickly integrate into your project
 - install
 
 vcpkg
-
-version: 0.3.0
 
 ```shell
 vcpkg install unimail-cpp-sdk
@@ -118,4 +116,4 @@ if you want to support other language, please open a issue.
 
 - tips
 
-If you want to use this SDK, please contact the author via i-curve@qq.com.
+If you want to use this SDK, please contact the author via admin@allcloud.top

@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(unimail-cpp-sdk VERSION 0.3.0 LANGUAGES CXX)
+project(unimail-cpp-sdk VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 set(UNIMAIL_MASTER_PROJECT OFF)
+set(UNIMAIL_GENERATED_INCLUDE_DIR ${PROJECT_BINARY_DIR}/generated/include)
 
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
@@ -20,24 +21,33 @@ endif()
 
 include(GNUInstallDirs)
 
+file(MAKE_DIRECTORY ${UNIMAIL_GENERATED_INCLUDE_DIR}/allcloud)
+configure_file(
+  ${PROJECT_SOURCE_DIR}/include/allcloud/unimail-version.h.in
+  ${UNIMAIL_GENERATED_INCLUDE_DIR}/allcloud/unimail-version.h
+  @ONLY)
+
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src SOURCE)
 
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(restclient-cpp CONFIG REQUIRED)
 
 add_library(unimail STATIC ${SOURCE})
-add_library(icurve::unimail ALIAS unimail)
+add_library(allcloud::unimail ALIAS unimail)
 
 set_target_properties(
-  unimail PROPERTIES VERSION ${${PROJECT_NAME}_VERSION}
-                    SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR})
+  unimail PROPERTIES VERSION ${PROJECT_VERSION}
+                    SOVERSION ${PROJECT_VERSION_MAJOR})
 target_include_directories(unimail PUBLIC
                 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                $<BUILD_INTERFACE:${UNIMAIL_GENERATED_INCLUDE_DIR}>
                 $<INSTALL_INTERFACE:include>)
 target_link_libraries(unimail PUBLIC nlohmann_json::nlohmann_json restclient-cpp)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
       DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES ${UNIMAIL_GENERATED_INCLUDE_DIR}/allcloud/unimail-version.h
+      DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/allcloud)
 
 
 # 进行库安装

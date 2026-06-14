@@ -1,6 +1,6 @@
 # unimail-cpp-sdk
 
-> 当前分支sdk的版本是v1, 此分支不再进行功能更新, 如果新用户请参考主分支master
+> 当前sdk的版本是v2, 如果你需要用以前的v1版本, 请切换v1分支
 
 unimail 的 c++ 语言 sdk, 快速集成到你的项目
 
@@ -22,8 +22,6 @@ unimail 的 c++ 语言 sdk, 快速集成到你的项目
 - 安装
 
 vcpkg
-
-version: 0.3.0
 
 ```shell
 vcpkg install unimail-cpp-sdk
@@ -118,4 +116,4 @@ sdk 默认返回的 msg 为中文
 
 - 提示
 
-如果想要使用 unimail sdk, 请通过邮件联系作者 i-curve@qq.com
+如果想要使用 unimail sdk, 请通过邮件联系作者 admin@allcloud.top
