@@ -72,7 +72,7 @@ install(FILES "${PROJECT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake"
   DESTINATION lib/cmake/${PROJECT_NAME})
 
 install(EXPORT ${TARGETS_EXPORT_NAME}
-  NAMESPACE icurve::
+  NAMESPACE allcloud::
   DESTINATION "lib/cmake/${PROJECT_NAME}")
 
 if (UNIMAIL_TEST)
