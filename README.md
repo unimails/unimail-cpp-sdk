@@ -11,13 +11,13 @@ This is a C++ SDK for Unimail. Quickly integrate into your project
 <!-- code_chunk_output -->
 
 - [unimail-cpp-sdk](#unimail-cpp-sdk)
-  - [simple usage](#simple-usage)
+  - [usage](#usage)
   - [api docs](#api-docs)
   - [support language](#support-language)
 
 <!-- /code_chunk_output -->
 
-## simple usage
+## usage
 
 - install
 
@@ -31,7 +31,7 @@ link in you cmake
 
 ```CMakeLists.txt
 find_package(unimail-cpp-sdk CONFIG REQUIRED)
-target_link_libraries(main PRIVATE icurve::unimail)
+target_link_libraries(main PRIVATE allcloud::unimail)
 ```
 
 - init a unimail client
@@ -41,65 +41,59 @@ you need a authorization key.
 main.cpp
 
 ```cpp
-#include <icurve/unimail-cpp-sdk.h>
+#include <allcloud/unimail-cpp-sdk.h>
 
 using namespace std;
 
 int main() {
     fmt::print("hello aaa unimail-test\n");
-    auto client = std::shared_ptr<icurve::UniMail>(
-        new icurve::UniMail("your sdk key"));
+    auto client = std::shared_ptr<allcloud::Unimail>(
+        new allcloud::Unimail("your sdk key"));
+    auto res = client.check_connection();
+    std::cout << res.to_string() << std::endl;
+    assert(res.is_success());
     return 0;
 }
 ```
 
 - send email
 
-example
-receiver: aaa@gmail.com  
-email subject: email subject  
-email content: this is a email content
-
 ```cpp
-client->send_email("email", "test", "test from unimailCppSdk");
-```
-
-- batch send email
-
-example
-receivers: aaa@gmail.com,bbb@gmail.com  
-email subject: email subject  
-email content: this is a email content
-
-```cpp
-client->batch_send_email(std::vector<std::string>{"email"}, "test", "test from unimailCppSdk");
+    unimail.set_language("zh");
+    allcloud::UnimailReq req;
+    req.receivers.push_back("receive email");
+    req.from = "cpp"; // options
+    // req.cc = "email";
+    // req.bcc = "email";
+    req.subject = "title";
+    // Either txt_content or html_content
+    req.txt_content = "this is a email from cpp sdk.";
+    req.html_content = "<h1>this is a email from cpp sdk. <span style=\"color: red\">red fond.</span></h1>";
+    // add file attachment
+    req.appendFile("att1.txt", "./attachment.txt");
+    auto res = unimail.send_email(req);
+    std::cout << res.to_string() << std::endl;
+    assert(res.is_success());
+    assert(!res.msg.empty());
 ```
 
 ## api docs
 
-1. icurve::UniMail(string key)
+1. allcloud::UniMail(string key)
 
 init a client by key
 
-2. void icurve::UniMail::set_language(std::string lang)
+2. void allcloud::UniMail::set_language(std::string lang)
 
 set language for the client,default is zh
 
-3. bool icurve::UniMail::check_connection();
+3. bool allcloud::UniMail::check_connection();
 
 check the host and key is ok
 
-4.  UniMailResponse icurve::UniMail::send_email(const std::string receiver,
-    const std::string subject,
-    const std::string content)
+4.  UniMailResponse allcloud::UniMail::send_email(const UnimailReq &req)
 
-send email to receiver. if you have many receiver, you can concat the receiver by ";" or use BatchSendEmail
-
-5. UniMailResponse icurve::UniMail::batch_send_email(const std::vector<std::string> receivers,
-   const std::string subject,
-   const std::string content);
-
-like send_email, but receivers is a vector
+please see usage
 
 ## support language
 
